@@ -145,19 +145,21 @@ def download_youtube_audio(url, output_dir, output_filename=None, quality=None):
         # Download video and audio streams
         print(f"[Downloading audio: {yt.title} > in > {output_filename_init}]")
         try:
-            audio_stream.download(".", filename=output_filename_init)
+            audio_stream.download(output_dir, filename=output_filename_init)
         except Exception as e:
             print(f"Error downloading audio stream: {e}")
             exit(1)
 
         # convert to mp3
-        convert_to_mp3(os.path.join(output_dir, output_filename_init),os.path.join(output_dir,output_filename_final))
+        convert_to_mp3(
+            os.path.join(output_dir, output_filename_init),
+            os.path.join(output_dir, output_filename_final))
 
     except Exception as e:
         print(f"Error: {e}")
 
 
-def download_youtube_video(url, output_dir='.', output_filename=None, quality=None, short=None):
+def download_youtube_video(url, output_dir, output_filename=None, quality=None, short=None):
 
     yt = get_source_yt(url)
     try:
@@ -223,7 +225,7 @@ def main():
         output_dir, output_filename = os.path.split(args.output)
     # directory name for current run
     d = datetime.now()
-    time = d.strftime("%d%m%Y_%H%M%S_%f")
+    time = d.strftime("%Y-%m-%d_%H-%M-%S_%f")
     output_dir = os.path.join(output_dir, time)
 
     if not args.video and not args.toMp3:
