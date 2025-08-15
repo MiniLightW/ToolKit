@@ -16,13 +16,8 @@ if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
 
 # install de ffmpeg
 if (Get-Command ffmpeg -ErrorAction SilentlyContinue) {
-    Write-Host "ffmpeg not installed."
+    Write-Host "ffmpeg is already installed."
 } else {
-    Write-Host "ffmpeg not installed or not in the PATH."
-}
-
-# install de ffmpeg
-if (-not (Get-Command ffmpeg -ErrorAction SilentlyContinue)) {
     Write-Host "ffmpeg not installed or not in the PATH."
     Write-Host "Attempting to install ffmpeg with winget..."
     winget install -e --id Gyan.FFmpeg
